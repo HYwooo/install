@@ -16,4 +16,5 @@ sed -i 's/^plugins=.*/plugins=(git rust python zsh-autosuggestions zsh-syntax-hi
 #eval "$(curl https://get.x-cmd.com)"
 #echo "[ ! -f \"\$HOME/.x-cmd.root/X\" ] || . \"\$HOME/.x-cmd.root/X\" " >> ~/.zshrc
 echo ". \"\$HOME/.cargo/env\"" >> ~/.zshrc && echo "export TERM=xterm-256color" >> ~/.zshrc
+source ~/.zshrc
 chsh -s $(which zsh)
