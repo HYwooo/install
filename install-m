@@ -1,23 +1,18 @@
 #!/bin/sh
 # apt update -y 
 # curl -sSL https://cdn.jsdelivr.net/gh/HYwooo/install@master/install-m | sh
+
 echo "******************* set apt mirror : TSINGHUA & USTC ******************" 
 echo "*******************              START               ******************" 
 sed -i 's@//.*archive.ubuntu.com@//mirrors.tuna.tsinghua.edu.cn@g' /etc/apt/sources.list.d/ubuntu.sources
 sed -i 's/security.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/ubuntu.sources
 apt update -y --fix-missing && apt install -y --no-install-recommends curl wget ca-certificates && sed -i 's/http:/https:/g' /etc/apt/sources.list.d/ubuntu.sources && apt update -y
+export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup
 echo "******************* apt mirror set : TSINGHUA & USTC ******************"  
-# git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git --depth=1 && cd WhiteSur-gtk-theme && ./install.sh -l
-##
-# curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-#export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
-#export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup
+
 apt install -y gcc g++ rustup 
-mkdir -p ~/.rustup
-echo '[dist]
-dist_server = "https://mirrors.tuna.tsinghua.edu.cn/rustup"
-update_root = "https://mirrors.tuna.tsinghua.edu.cn/rustup"' > ~/.rustup/settings.toml
-rustup default stable
+mkdir -p ~/.rustup && rustup default stable
 mkdir -p ~/.cargo && mkdir -p ~/.cargo/env && echo "[source.crates-io]\nreplace-with = \"tuna-sparse\"\n\n[source.tuna-sparse]\nregistry = \"sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/\"" > ~/.cargo/config.toml
 ##
 apt install -y git zsh fonts-powerline
@@ -29,7 +24,6 @@ sed -i 's/^ZSH_THEME=.*/ZSH_THEME="materialshell\/materialshell"/' ~/.zshrc
 sed -i 's/^plugins=.*/plugins=(git rust python zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
 eval "$(curl https://get.x-cmd.com)"
 echo "[ ! -f \"\$HOME/.x-cmd.root/X\" ] || . \"\$HOME/.x-cmd.root/X\" " >> ~/.zshrc
-
 echo ". \"\$HOME/.cargo/env\"" >> ~/.zshrc && echo "export TERM=xterm-256color" >> ~/.zshrc
-source ~/.zshrc
 chsh -s $(which zsh)
+echo "******************* reconnect to apply changes ******************"  
