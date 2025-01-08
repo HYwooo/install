@@ -1,5 +1,5 @@
 #!/bin/zsh
-sudo apt install -y coreutils ca-certificates rustup --quiet --no-install-recommends
+sudo apt install -y coreutils ca-certificates gcc g++ rustup --quiet --no-install-recommends
 if timeout 2 curl -s -o /dev/null https://www.google.com; then
     rustup default stable
 else
