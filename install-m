@@ -1,6 +1,6 @@
 #!/bin/sh
 # apt update -y 
-# curl -sSL https://cdn.jsdelivr.net/gh/HYwooo/install@master/install | sudo sh
+# curl -sSL https://cdn.jsdelivr.net/gh/HYwooo/install@master/install-m | sh
 echo "******************* set apt mirror : TSINGHUA & USTC ******************" 
 echo "*******************              START               ******************" 
 sed -i 's@//.*archive.ubuntu.com@//mirrors.tuna.tsinghua.edu.cn@g' /etc/apt/sources.list.d/ubuntu.sources
@@ -11,7 +11,7 @@ echo "******************* apt mirror set : TSINGHUA & USTC ******************"
 ##
 # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 apt install -y gcc g++ rustup && rustup default stable
-mkdir -p ~/.cargo && mkdir -p ~/.cargo/env && echo -e '[source.crates-io]\nreplace-with = "tuna-sparse"\n\n[source.tuna-sparse]\nregistry = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"' > ~/.cargo/config.toml
+mkdir -p ~/.cargo && mkdir -p ~/.cargo/env && echo "[source.crates-io]\nreplace-with = \"tuna-sparse\"\n\n[source.tuna-sparse]\nregistry = \"sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/\"" > ~/.cargo/config.toml
 ##
 apt install -y git zsh fonts-powerline
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
@@ -22,4 +22,7 @@ sed -i 's/^ZSH_THEME=.*/ZSH_THEME="materialshell\/materialshell"/' ~/.zshrc
 sed -i 's/^plugins=.*/plugins=(git rust python zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
 eval "$(curl https://get.x-cmd.com)"
 echo "[ ! -f \"\$HOME/.x-cmd.root/X\" ] || . \"\$HOME/.x-cmd.root/X\" " >> ~/.zshrc
+
 echo ". \"\$HOME/.cargo/env\"" >> ~/.zshrc && echo "export TERM=xterm-256color" >> ~/.zshrc
+source ~/.zshrc
+chsh -s $(which zsh)
