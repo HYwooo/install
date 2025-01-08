@@ -1,6 +1,6 @@
 #!/bin/sh
 # apt update -y && apt install -y curl
-# curl -sSL https://cdn.jsdelivr.net/gh/HYwooo/install@master/install | sh
+curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@master/aptmirror.sh | sudo sh
 ############################################################################################################
 apt install -y gcc g++ rustup
 mkdir -p ~/.rustup && rustup default stable
