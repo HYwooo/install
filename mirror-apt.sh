@@ -1,7 +1,7 @@
 #!/bin/sh
 # TO learn if running in compicated network environment, and set apt mirror accordingly.
-# curl -sSL https://raw.githubusercontent.com/HYwooo/install/master/aptmirror.sh | sudo sh
-# curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@master/aptmirror.sh | sudo sh
+# curl -sSL https://raw.githubusercontent.com/HYwooo/install/master/mirror-apt.sh | sudo sh
+# curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@master/mirror-apt.sh | sudo sh
 # Install coreutils if not already installed
 sudo apt install -y coreutils ca-certificates --quiet --no-install-recommends
 # Try to access Google with a timeout of 2 seconds
