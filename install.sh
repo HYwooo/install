@@ -32,7 +32,7 @@ echo '. "$HOME/.cargo/env"' >> ~/.zshrc
 $(which zsh) -c "source ~/.zshrc"
 
 # Change the default shell to zsh
-sudo chsh -s $(which zsh)
+chsh -s $(which zsh)
 
 # Print a message indicating the installation is complete
 echo "******************* Install Finish. ******************"
