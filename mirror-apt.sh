@@ -11,7 +11,7 @@ else
     # If timeout:
     echo -e "\033[1;31mTimeout: Unable to access Google.\033[0m"
     echo -e "\033[1;34m******************* Setting apt mirror: TSINGHUA & USTC ******************\033[0m"
-    
+
     # Replace HTTP with HTTPS
     sed -i 's/http:/https:/g' /etc/apt/sources.list.d/ubuntu.sources
 
