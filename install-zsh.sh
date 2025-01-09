@@ -2,7 +2,7 @@
 echo -e "\033[1;34m******************* Installing Zsh ******************\033[0m"
 
 # Install Git and Zsh quietly without recommended packages, then set Zsh as the default shell, and create a symbolic link from /bin/sh to Zsh
-sudo apt install -y git zsh --quiet --no-install-recommends && sudo chsh -s $(which zsh) 
+sudo apt install -y git zsh --quiet --no-install-recommends && chsh -s $(which zsh) 
 
 # Add an environment variable to set Zsh as the default shell in the ~/.zshrc file
 echo "export SHELL=/usr/bin/zsh" >>~/.zshrc
