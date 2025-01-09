@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Pre-install:
-# sudo apt update -y && sudo apt install -y curl sudo --quiet --no-install-recommends
+# sudo apt update -y && sudo apt install -y curl ca-certificates sudo --quiet --no-install-recommends
 
 # Download and execute the installation script from the specified URL
 # curl -sSL https://raw.githubusercontent.com/HYwooo/install/master/install.sh | sudo sh
