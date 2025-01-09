@@ -20,7 +20,7 @@ else
     sudo sed -i 's/security.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/ubuntu.sources
 
     # Update package list and install necessary tools
-    sudo apt update -y --fix-missing
+    sudo apt update -y --fix-missing --quiet
 
     echo -e "\033[1;32m******************* apt mirror set: TSINGHUA & USTC ******************\033[0m"
 fi
