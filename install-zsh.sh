@@ -14,7 +14,7 @@ echo -e "\033[1;32m******************* Zsh installed ******************\033[0m"
 echo -e "\033[1;34m******************* Installing Oh My Zsh ******************\033[0m"
 
 # Install Oh My Zsh by downloading and running the installation script from the official repository
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://gcore.jsdelivr.net/gh/ohmyzsh/ohmyzsh@master/tools/install.sh)"
 
 # Clone the zsh-autosuggestions plugin repository into the Oh My Zsh custom plugins directory
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions

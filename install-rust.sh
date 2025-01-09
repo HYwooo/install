@@ -7,7 +7,7 @@
 $(which zsh) -c "sudo apt install -y coreutils ca-certificates gcc g++ --quiet --no-install-recommends"
 
 # Check if Google is accessible (to determine network connectivity)
-if timeout 2 curl -s -o /dev/null https://www.google.com; then
+if [ -z "$USE_MIRROR" ] && timeout 2 curl -s -o /dev/null https://www.google.com; then
     # If Google is accessible, install Rust using the official method
     $(which zsh) -c "curl https://sh.rustup.rs -sSf | sh -s -- -y"
 
