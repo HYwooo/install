@@ -5,7 +5,7 @@
 # Install coreutils if not already installed
 sudo apt install -y coreutils ca-certificates --quiet --no-install-recommends
 # Try to access Google with a timeout of 2 seconds
-if timeout 2 curl -s -o /dev/null https://www.google.com; then
+if [ -z "$USE_APT_MIRROR" ] && timeout 2 curl -s -o /dev/null https://www.google.com; then
     sed -i 's/http:/https:/g' /etc/apt/sources.list.d/ubuntu.sources
 else
     # If timeout:
