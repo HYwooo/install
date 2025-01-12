@@ -30,8 +30,10 @@ if [ "$USE_MIRROR" != "1" ] && timeout 1 curl -s -o /dev/null https://www.google
     $(which zsh) -c "source ~/.zshrc"
 else
     # If Google is not accessible, print an error message and use a mirror
-    echo -e "\033[1;31mTimeout: Unable to access Google.\033[0m"
-    echo -e "\033[1;34m******************* Setting Rustup mirror: TSINGHUA   ******************\033[0m"
+    echo -e "\033[1
+    31mTimeout: Unable to access Google.\033[0m"
+    echo -e "\033[1
+    34m******************* Setting Rustup mirror: TSINGHUA ******************\033[0m"
 
     # Set environment variables to use the Tsinghua University mirror for Rustup
     $(which zsh) -c "export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup"

@@ -31,7 +31,7 @@ echo -e "\033[1;34m******************* Installing Zplug ******************\033[0
 
 # Install Zplug by downloading and running the installation script from the official repository
 if [ ! -d ~/.zplug ]; then
-    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+    curl -sL --proto-redir -all,https https://gcore.jsdelivr.net/gh/zplug/installer@master/installer.zsh | zsh
     echo -e "\033[1;32m******************* Zplug installed ******************\033[0m"
 else
     echo -e "\033[1;33mZplug is already installed, skipping installation.\033[0m"
@@ -45,7 +45,7 @@ touch ~/.zshrc
 
 # Add Zplug configuration to ~/.zshrc
 if ! grep -q "source ~/.zplug/init.zsh" ~/.zshrc; then
-    cat <<EOF >>~/.zshrc
+    cat << EOF >>~/.zshrc
 # Zplug configuration
 export ZPLUG_HOME=~/.zplug
 source ~/.zplug/init.zsh

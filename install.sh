@@ -10,7 +10,6 @@
 # From master[jsdelivr]:
 # curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@master/install.sh | sh
 
-
 # Download and execute the mirror-apt.sh script to configure apt mirrors
 curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@latest/mirror-apt.sh | sh
 
