@@ -12,13 +12,13 @@
 
 
 # Download and execute the mirror-apt.sh script to configure apt mirrors
-curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@master/mirror-apt.sh | sh
+curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@latest/mirror-apt.sh | sh
 
 # Download and execute the install-zsh.sh script to install Zsh
-curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@master/install-zsh.sh | sh
+curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@latest/install-zsh.sh | sh
 
 # Download and execute the install-rust.sh script to install Rust
-curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@master/install-rust.sh | sh
+curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@latest/install-rust.sh | sh
 
 # Evaluate and execute the x-cmd installation script
 eval "$(curl https://get.x-cmd.com)"
