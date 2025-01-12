@@ -1,35 +1,60 @@
-# Print a blue-colored header indicating the start of Zsh installation
 echo -e "\033[1;34m******************* Installing Zsh ******************\033[0m"
 
-# Install Git and Zsh quietly without recommended packages, then set Zsh as the default shell, and create a symbolic link from /bin/sh to Zsh
-sudo apt install -y git zsh --quiet --no-install-recommends && chsh -s $(which zsh) $USER
-
-# Print a green-colored header indicating the completion of Zsh installation
+# Install Git and Zsh quietly without recommended packages, then set Zsh as the default shell
+sudo apt install -y git zsh gawk --quiet --no-install-recommends && chsh -s $(which zsh) $USER
 echo -e "\033[1;32m******************* Zsh installed ******************\033[0m"
 
-# Print a blue-colored header indicating the start of Oh My Zsh installation
-echo -e "\033[1;34m******************* Installing Oh My Zsh ******************\033[0m"
+echo -e "\033[1;34m******************* Installing Zplug ******************\033[0m"
+# Install Zplug by downloading and running the installation script from the official repository
+curl -sL --proto-redir -all,https https://gcore.jsdelivr.net/gh/zplug/installer@master/installer.zsh | zsh
+echo -e "\033[1;32m******************* Zplug installed ******************\033[0m"
 
-# Install Oh My Zsh by downloading and running the installation script from the official repository
-curl -fsSL https://gcore.jsdelivr.net/gh/ohmyzsh/ohmyzsh@master/tools/install.sh | sh -s -- -y
 
-# Clone the zsh-autosuggestions plugin repository into the Oh My Zsh custom plugins directory
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+echo -e "\033[1;34m******************* Configuring Zsh with Zplug ******************\033[0m"
+# Create a ~/.zshrc file if it doesn't exist
+touch ~/.zshrc
 
-# Clone the zsh-syntax-highlighting plugin repository into the Oh My Zsh custom plugins directory
-git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# Add Zplug configuration to ~/.zshrc
+cat <<EOF >>~/.zshrc
+# Zplug configuration
+source ~/.zplug/init.zsh
 
-# Update the Zsh theme to "candy" in the ~/.zshrc file
-sed -i 's/^ZSH_THEME=.*/ZSH_THEME="candy"/' ~/.zshrc
+# History config
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
 
-# Update the plugins list in the ~/.zshrc file to include Git, Rust, Python, zsh-autosuggestions, and zsh-syntax-highlighting
-sed -i 's/^plugins=.*/plugins=(git rust python zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
+# Plugins
+# zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zdharma/fast-syntax-highlighting"
+# zplug "zpm-zsh/ls"
+# zplug "plugins/docker", from:oh-my-zsh
+# zplug "plugins/composer", from:oh-my-zsh
+# zplug "plugins/extract", from:oh-my-zsh
+# zplug "lib/completion", from:oh-my-zsh
+# zplug "plugins/sudo", from:oh-my-zsh
+# zplug "b4b4r07/enhancd", use:init.sh
 
-# Add an environment variable to set the terminal type to xterm-256color in the ~/.zshrc file
-echo "export TERM=xterm-256color" >>~/.zshrc
+# Theme (optional, replace with your preferred theme)
+zplug "carloscuesta/materialshell", as:theme, depth:1
+
+# Install plugins if not already installed
+if ! zplug check; then
+    zplug install
+fi
+
+# Load plugins
+zplug load
+
+# Environment variables
+export TERM=xterm-256color
+EOF
 
 # Reload the ~/.zshrc file to apply the changes
 $(which zsh) -c "source ~/.zshrc"
 
-# Print a green-colored header indicating the completion of Oh My Zsh installation
-echo -e "\033[1;32m******************* Oh My Zsh installed ******************\033[0m"
+# Print a green-colored header indicating the completion of Zsh configuration
+echo -e "\033[1;32m******************* Zsh configured with Zplug ******************\033[0m"
