@@ -10,7 +10,7 @@
 # Install coreutils if not already installed
 sudo apt install -y curl coreutils ca-certificates --quiet --no-install-recommends
 
-if [ "$USE_MIRROR" != "1" ] && timeout 2 curl -s -o /dev/null https://www.google.com; then
+if [ "$USE_MIRROR" != "1" ] && timeout 1 curl -s -o /dev/null https://www.google.com; then
     echo -e "\033[1;33mUSE_MIRROR not set to 1 and Google is reachable, skipping mirror setup.\033[0m"
     sudo sed -i 's/http:/https:/g' /etc/apt/sources.list.d/ubuntu.sources
 else
