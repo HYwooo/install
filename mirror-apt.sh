@@ -9,6 +9,7 @@ if [ "$USE_MIRROR" != "1" ]; then
     echo -e "\033[1;33mUSE_MIRROR not set to 1, skipping mirror setup.\033[0m"
     sudo sed -i 's/http:/https:/g' /etc/apt/sources.list.d/ubuntu.sources
 else
+    echo -e "\033[1;33mUSE_MIRROR set to 1, setting up mirror.\033[0m"
     echo -e "\033[1;34m******************* Setting up apt mirror: TSINGHUA & USTC ******************\033[0m"
 
     # Replace HTTP with HTTPS
