@@ -9,13 +9,21 @@
 # Print a blue-colored header indicating the start of Zsh installation
 echo -e "\033[1;34m******************* Installing Zsh ******************\033[0m"
 
-# Install Git and Zsh quietly without recommended packages, then set Zsh as the default shell
+# Install Git and Zsh quietly without recommended packages
 if ! command -v zsh >/dev/null 2>&1; then
     sudo apt install -y gawk git zsh --quiet --no-install-recommends
-    sudo chsh -s "$(which zsh)" "$USER"
     echo -e "\033[1;32m******************* Zsh installed ******************\033[0m"
 else
     echo -e "\033[1;33mZsh is already installed, skipping installation.\033[0m"
+fi
+
+# Set Zsh as the default shell (requires user password)
+if [ "$(basename "$SHELL")" != "zsh" ]; then
+    echo "Changing default shell to Zsh. Please enter your password:"
+    sudo chsh -s "$(which zsh)" "$USER"
+    echo -e "\033[1;32mDefault shell changed to Zsh.\033[0m"
+else
+    echo -e "\033[1;33mZsh is already the default shell.\033[0m"
 fi
 
 # Print a blue-colored header indicating the start of Zplug installation
@@ -39,6 +47,7 @@ touch ~/.zshrc
 if ! grep -q "source ~/.zplug/init.zsh" ~/.zshrc; then
     cat <<EOF >>~/.zshrc
 # Zplug configuration
+export ZPLUG_HOME=~/.zplug
 source ~/.zplug/init.zsh
 
 # History config
