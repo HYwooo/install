@@ -6,24 +6,38 @@
 # From master[jsdelivr]:
 # curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@master/install-zsh.sh | sh
 
+# Print a blue-colored header indicating the start of Zsh installation
 echo -e "\033[1;34m******************* Installing Zsh ******************\033[0m"
 
 # Install Git and Zsh quietly without recommended packages, then set Zsh as the default shell
-sudo apt install -y gawk git zsh --quiet --no-install-recommends && chsh -s $(which zsh) $USER
-echo -e "\033[1;32m******************* Zsh installed ******************\033[0m"
+if ! command -v zsh >/dev/null 2>&1; then
+    sudo apt install -y gawk git zsh --quiet --no-install-recommends
+    chsh -s "$(which zsh)" "$USER"
+    echo -e "\033[1;32m******************* Zsh installed ******************\033[0m"
+else
+    echo -e "\033[1;33mZsh is already installed, skipping installation.\033[0m"
+fi
 
+# Print a blue-colored header indicating the start of Zplug installation
 echo -e "\033[1;34m******************* Installing Zplug ******************\033[0m"
+
 # Install Zplug by downloading and running the installation script from the official repository
-curl -sL --proto-redir -all,https https://gcore.jsdelivr.net/gh/zplug/installer@master/installer.zsh | zsh
-echo -e "\033[1;32m******************* Zplug installed ******************\033[0m"
+if [ ! -d ~/.zplug ]; then
+    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+    echo -e "\033[1;32m******************* Zplug installed ******************\033[0m"
+else
+    echo -e "\033[1;33mZplug is already installed, skipping installation.\033[0m"
+fi
 
-
+# Print a blue-colored header indicating the start of Zsh configuration
 echo -e "\033[1;34m******************* Configuring Zsh with Zplug ******************\033[0m"
+
 # Create a ~/.zshrc file if it doesn't exist
 touch ~/.zshrc
 
 # Add Zplug configuration to ~/.zshrc
-cat <<EOF >>~/.zshrc
+if ! grep -q "source ~/.zplug/init.zsh" ~/.zshrc; then
+    cat <<EOF >>~/.zshrc
 # Zplug configuration
 source ~/.zplug/init.zsh
 
@@ -33,18 +47,10 @@ SAVEHIST=10000
 HISTFILE=~/.zsh_history
 
 # Plugins
-# zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zdharma/fast-syntax-highlighting"
-# zplug "zpm-zsh/ls"
-# zplug "plugins/docker", from:oh-my-zsh
-# zplug "plugins/composer", from:oh-my-zsh
-# zplug "plugins/extract", from:oh-my-zsh
-# zplug "lib/completion", from:oh-my-zsh
-# zplug "plugins/sudo", from:oh-my-zsh
-# zplug "b4b4r07/enhancd", use:init.sh
 
 # Theme (optional, replace with your preferred theme)
 zplug "carloscuesta/materialshell", as:theme, depth:1
@@ -60,9 +66,14 @@ zplug load
 # Environment variables
 export TERM=xterm-256color
 EOF
+    echo -e "\033[1;32m******************* Zsh configured with Zplug ******************\033[0m"
+else
+    echo -e "\033[1;33mZsh configuration already exists in ~/.zshrc, skipping configuration.\033[0m"
+fi
 
 # Reload the ~/.zshrc file to apply the changes
-$(which zsh) -c "source ~/.zshrc"
-
-# Print a green-colored header indicating the completion of Zsh configuration
-echo -e "\033[1;32m******************* Zsh configured with Zplug ******************\033[0m"
+if [ -n "$ZSH_VERSION" ]; then
+    source ~/.zshrc
+else
+    zsh -c "source ~/.zshrc"
+fi
