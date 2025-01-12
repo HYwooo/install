@@ -2,14 +2,19 @@
 
 # Install Rust and set up environment variables
 # This script installs Rust and configures it to use a mirror if access to Google is blocked.
-
+# From latest[jsdelivr]:
+# curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@latest/install-rust.sh | sh
+# From master[raw]:
+# curl -sSL https://raw.githubusercontent.com/HYwooo/install/refs/heads/master/install-rust.sh | sh
+# From master[jsdelivr]:
+# curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@master/install-rust.sh | sh
 # Install necessary dependencies
 $(which zsh) -c "sudo apt install -y coreutils ca-certificates gcc g++ --quiet --no-install-recommends"
 
 # Check if Google is accessible (to determine network connectivity)
-if [ -z "$USE_MIRROR" ] && timeout 2 curl -s -o /dev/null https://www.google.com; then
+if [ "$USE_MIRROR" != "1" ] && timeout 1 curl -s -o /dev/null https://www.google.com; then
     # If Google is accessible, install Rust using the official method
-    $(which zsh) -c "curl https://sh.rustup.rs -sSf | sh -s -- -y"
+    $(which zsh) -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
     # Set the default Rust toolchain to stable
     $(which zsh) -c "rustup default stable"
@@ -40,7 +45,7 @@ else
     $(which zsh) -c "source ~/.zshrc"
 
     # Install Rust using the Tsinghua mirror
-    $(which zsh) -c "curl https://sh.rustup.rs -sSf | sh -s -- -y"
+    $(which zsh) -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
     # Print a success message
     echo -e "\033[1;32m******************* Rustup mirror set:    TSINGHUA    ******************\033[0m"
@@ -56,7 +61,7 @@ else
     echo 'export PATH="$HOME/.cargo/bin:$PATH"' >>$HOME/.cargo/env
 
     # Configure Cargo to use the Tsinghua mirror for crates.io
-    echo -e '[registries.crates-io]\nprotocol = "sparse"\n[source.crates-io]\nreplace-with = "tuna"\n[source.tuna]\nregistry = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"' >>~/.cargo/config.toml
+    echo -e '[registries.crates-io]\nprotocol = "sparse"\n[source.crates-io]\nreplace-with = "tuna-sparse"\n[source.tuna]\nregistry = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"' >>~/.cargo/config.toml
 
     # Print a success message
     echo -e "\033[1;32m******************* Cargo mirror set: TSINGHUA SPARSE ******************\033[0m"
