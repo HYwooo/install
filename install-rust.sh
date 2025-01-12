@@ -61,7 +61,7 @@ else
     echo 'export PATH="$HOME/.cargo/bin:$PATH"' >>$HOME/.cargo/env
 
     # Configure Cargo to use the Tsinghua mirror for crates.io
-    echo -e '[registries.crates-io]\nprotocol = "sparse"\n[source.crates-io]\nreplace-with = "tuna-sparse"\n[source.tuna]\nregistry = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"' >>~/.cargo/config.toml
+    echo -e '[registries.crates-io]\nprotocol = "sparse"\n[source.crates-io]\nreplace-with = "tuna-sparse"\n[source.tuna-sparse]\nregistry = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"' >>~/.cargo/config.toml
 
     # Print a success message
     echo -e "\033[1;32m******************* Cargo mirror set: TSINGHUA SPARSE ******************\033[0m"
