@@ -19,7 +19,7 @@ fi
 
 # Set Zsh as the default shell (requires user password)
 if [ "$(basename "$SHELL")" != "zsh" ]; then
-    echo "Changing default shell to Zsh. Please enter your password:"
+    echo "Changing default shell to Zsh. "
     sudo chsh -s "$(which zsh)" "$USER"
     echo -e "\033[1;32mDefault shell changed to Zsh.\033[0m"
 else
