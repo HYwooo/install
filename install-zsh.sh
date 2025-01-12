@@ -1,3 +1,11 @@
+#!/bin/sh
+# From latest[jsdelivr]:
+# curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@latest/install-zsh.sh | sh
+# From master[raw]:
+# curl -sSL https://raw.githubusercontent.com/HYwooo/install/refs/heads/master/install-zsh.sh | sh
+# From master[jsdelivr]:
+# curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@master/install-zsh.sh | sh
+
 echo -e "\033[1;34m******************* Installing Zsh ******************\033[0m"
 
 # Install Git and Zsh quietly without recommended packages, then set Zsh as the default shell
