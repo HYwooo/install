@@ -12,7 +12,7 @@ echo -e "\033[1;34m******************* Installing Zsh ******************\033[0m"
 # Install Git and Zsh quietly without recommended packages, then set Zsh as the default shell
 if ! command -v zsh >/dev/null 2>&1; then
     sudo apt install -y gawk git zsh --quiet --no-install-recommends
-    chsh -s "$(which zsh)" "$USER"
+    sudo chsh -s "$(which zsh)" "$USER"
     echo -e "\033[1;32m******************* Zsh installed ******************\033[0m"
 else
     echo -e "\033[1;33mZsh is already installed, skipping installation.\033[0m"
