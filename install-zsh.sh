@@ -81,8 +81,5 @@ else
 fi
 
 # Reload the ~/.zshrc file to apply the changes
-if [ -n "$ZSH_VERSION" ]; then
-    source ~/.zshrc
-else
-    zsh -c "source ~/.zshrc"
-fi
+zsh -c "source ~/.zshrc"
+
