@@ -1,5 +1,5 @@
 #!/bin/sh
-# TO learn if running in complicated network environment, and set apt mirror accordingly.
+# To learn if running in complicated network environment, and set apt mirror accordingly.
 # From latest[jsdelivr]:
 # curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@latest/mirror-apt.sh | sh
 # From master[raw]:
