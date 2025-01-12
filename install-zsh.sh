@@ -51,13 +51,13 @@ export ZPLUG_HOME=~/.zplug
 source ~/.zplug/init.zsh
 
 # History config
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=1000
+SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
 # Plugins
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-history-substring-search"
+# zplug "zsh-users/zsh-completions"
+# zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zdharma/fast-syntax-highlighting"
 
