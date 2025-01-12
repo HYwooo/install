@@ -9,7 +9,7 @@
 echo -e "\033[1;34m******************* Installing Zsh ******************\033[0m"
 
 # Install Git and Zsh quietly without recommended packages, then set Zsh as the default shell
-sudo apt install -y git zsh gawk --quiet --no-install-recommends && chsh -s $(which zsh) $USER
+sudo apt install -y gawk git zsh --quiet --no-install-recommends && chsh -s $(which zsh) $USER
 echo -e "\033[1;32m******************* Zsh installed ******************\033[0m"
 
 echo -e "\033[1;34m******************* Installing Zplug ******************\033[0m"
