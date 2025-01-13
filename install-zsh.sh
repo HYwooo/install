@@ -44,8 +44,8 @@ echo -e "\033[1;34m******************* Configuring Zsh with Zplug **************
 touch ~/.zshrc
 
 # Add Zplug configuration to ~/.zshrc
-if ! grep -q "source ~/.zplug/init.zsh" ~/.zshrc; then
-    cat << EOF >>~/.zshrc
+echo -e "\033[1;34m******************* Add info to ~/.zshrc ******************\033[0m"
+    cat << EOF >> ~/.zshrc
 # Zplug configuration
 export ZPLUG_HOME=~/.zplug
 source ~/.zplug/init.zsh
@@ -59,10 +59,10 @@ HISTFILE=~/.zsh_history
 # zplug "zsh-users/zsh-completions"
 # zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-autosuggestions"
-zplug "zdharma/fast-syntax-highlighting"
+zplug "zsh-users/zsh-syntax-highlighting"
 
 # Theme (optional, replace with your preferred theme)
-zplug "carloscuesta/materialshell", as:theme, depth:1
+zplug "carloscuesta/materialshell", as:theme
 
 # Install plugins if not already installed
 if ! zplug check; then
@@ -76,9 +76,7 @@ zplug load
 export TERM=xterm-256color
 EOF
     echo -e "\033[1;32m******************* Zsh configured with Zplug ******************\033[0m"
-else
-    echo -e "\033[1;33mZsh configuration already exists in ~/.zshrc, skipping configuration.\033[0m"
-fi
+
 
 # Reload the ~/.zshrc file to apply the changes
 zsh -c "source ~/.zshrc"
