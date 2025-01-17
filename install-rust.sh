@@ -21,11 +21,13 @@ if [ "$USE_MIRROR" != "1" ] && timeout 1 curl -s -o /dev/null https://www.google
     rustup default stable
 
     # Create the .cargo directory if it doesn't exist
-    # mkdir -p $HOME/.cargo
-
+    mkdir -p $HOME/.cargo
+    touch $HOME/.zshrc
+    touch $HOME/.cargo/env
     # Add Rust environment variables to .zshrc
     echo '. "$HOME/.cargo/env"' >>$HOME/.zshrc
     # echo '. "$HOME/.cargo/env"' >>$HOME/.bashrc
+    
     echo 'export PATH="$HOME/.cargo/bin:$PATH"' >>$HOME/.cargo/env
 
     # Reload the shell configuration
@@ -44,6 +46,7 @@ else
     echo "export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup" >>~/.zshrc
 
     # Reload the shell configuration
+    touch $HOME/.zshrc
     zsh -c "source ~/.zshrc"
 
     # Install Rust using the Tsinghua mirror
@@ -57,9 +60,11 @@ else
     rustup default stable
 
     # Create the .cargo directory if it doesn't exist
-    # mkdir -p $HOME/.cargo
+    mkdir -p $HOME/.cargo
 
     # Add Rust environment variables to .zshrc
+    
+    touch $HOME/.cargo/env
     echo '. "$HOME/.cargo/env"' >>$HOME/.zshrc
     echo 'export PATH="$HOME/.cargo/bin:$PATH"' >>$HOME/.cargo/env
 
