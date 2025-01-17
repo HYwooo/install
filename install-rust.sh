@@ -9,7 +9,7 @@
 # From master[jsdelivr]:
 # curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@master/install-rust.sh | sh
 # Install necessary dependencies
-sudo apt install -y coreutils ca-certificates gcc g++ --quiet --no-install-recommends"
+sudo apt install -y coreutils ca-certificates gcc g++ --quiet --no-install-recommends
 
 # Check if Google is accessible (to determine network connectivity)
 if [ "$USE_MIRROR" != "1" ] && timeout 1 curl -s -o /dev/null https://www.google.com; then
