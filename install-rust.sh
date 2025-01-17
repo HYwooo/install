@@ -9,25 +9,27 @@
 # From master[jsdelivr]:
 # curl -sSL https://gcore.jsdelivr.net/gh/HYwooo/install@master/install-rust.sh | sh
 # Install necessary dependencies
-$(which zsh) -c "sudo apt install -y coreutils ca-certificates gcc g++ --quiet --no-install-recommends"
+sudo apt install -y coreutils ca-certificates gcc g++ --quiet --no-install-recommends"
 
 # Check if Google is accessible (to determine network connectivity)
 if [ "$USE_MIRROR" != "1" ] && timeout 1 curl -s -o /dev/null https://www.google.com; then
-    # If Google is accessible, install Rust using the official method
-    $(which zsh) -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+    sudo apt install rustup -y --quiet
+    # zsh -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
     # Set the default Rust toolchain to stable
-    $(which zsh) -c "rustup default stable"
+    rustup default stable
 
     # Create the .cargo directory if it doesn't exist
-    mkdir -p $HOME/.cargo
+    # mkdir -p $HOME/.cargo
 
     # Add Rust environment variables to .zshrc
     echo '. "$HOME/.cargo/env"' >>$HOME/.zshrc
+    # echo '. "$HOME/.cargo/env"' >>$HOME/.bashrc
     echo 'export PATH="$HOME/.cargo/bin:$PATH"' >>$HOME/.cargo/env
 
     # Reload the shell configuration
-    $(which zsh) -c "source ~/.zshrc"
+    zsh -c "source ~/.zshrc"
 else
     # If Google is not accessible, print an error message and use a mirror
     echo -e "\033[131mTimeout: Unable to access Google.\033[0m"
@@ -42,30 +44,32 @@ else
     echo "export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup" >>~/.zshrc
 
     # Reload the shell configuration
-    $(which zsh) -c "source ~/.zshrc"
+    zsh -c "source ~/.zshrc"
 
     # Install Rust using the Tsinghua mirror
-    $(which zsh) -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    sudo apt install rustup -y --quiet
+    #$(which zsh) -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
     # Print a success message
     echo -e "\033[1;32m******************* Rustup mirror set:    TSINGHUA    ******************\033[0m"
 
     # Set the default Rust toolchain to stable
-    $(which zsh) -c "rustup default stable"
+    rustup default stable
 
     # Create the .cargo directory if it doesn't exist
-    mkdir -p $HOME/.cargo
+    # mkdir -p $HOME/.cargo
 
     # Add Rust environment variables to .zshrc
     echo '. "$HOME/.cargo/env"' >>$HOME/.zshrc
     echo 'export PATH="$HOME/.cargo/bin:$PATH"' >>$HOME/.cargo/env
 
     # Configure Cargo to use the Tsinghua mirror for crates.io
+    touch ~/.cargo/config.toml
     echo -e '[registries.crates-io]\nprotocol = "sparse"\n[source.crates-io]\nreplace-with = "tuna-sparse"\n[source.tuna-sparse]\nregistry = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"' >>~/.cargo/config.toml
 
     # Print a success message
     echo -e "\033[1;32m******************* Cargo mirror set: TSINGHUA SPARSE ******************\033[0m"
 
     # Reload the shell configuration
-    $(which zsh) -c "source ~/.zshrc"
+    zsh -c "source ~/.zshrc"
 fi
