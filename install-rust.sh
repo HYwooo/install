@@ -33,15 +33,14 @@ touch ~/.bashrc
 curl --proto '=https' --tlsv1.2 -sSf https://rsproxy.cn/rustup-init.sh | sh -s -- -y
 
 # Add Cargo's bin directory to PATH
-if [ -f "$HOME/.cargo/env" ]; then
-    . "$HOME/.cargo/env"  # Load Cargo environment immediately
-    echo '. "$HOME/.cargo/env"' >> ~/.bashrc  # Persist for future sessions
-fi
+echo '. "$HOME/.cargo/env"' >> ~/.bashrc  # Persist for future sessions
+
 
 echo -e "\033[1;32m******************* Rustup mirror set:    RsProxy.cn    ******************\033[0m"
 
 # Configure Cargo to use sparse registry mirror
 mkdir -p ~/.cargo  # Ensure directory exists
+touch ~/.cargo/config.toml  # Ensure file exists
 cat > ~/.cargo/config.toml << EOF
 [source.crates-io]
 replace-with = "rsproxy-sparse"
