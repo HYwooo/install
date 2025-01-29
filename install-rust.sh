@@ -28,7 +28,6 @@ echo 'export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"' >> ~/.bashrc
 
 # Ensure .bashrc exists and reload environment
 touch ~/.bashrc
-. ~/.bashrc
 
 # Install Rust using the mirror
 curl --proto '=https' --tlsv1.2 -sSf https://rsproxy.cn/rustup-init.sh | sh -s -- -y
